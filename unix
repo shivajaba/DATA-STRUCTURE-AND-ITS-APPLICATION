@@ -1,0 +1,333 @@
+3A)) write a shell script to display current working
+echo " The Current Working Directory:" 
+pwd  
+echo "The File and Directories are:" 
+ls -la 
+echo  
+echo "Current Date and Time:" 
+
+3b))
+echo "Creating source directory 'source_dir'..." 
+mkdir -p source_dir  
+echo "Creating a file 'sample.txt' inside 'source_dir'..." 
+echo "This is a sample file." > source_dir/sample.txt  
+echo "Creating destination directory 'destination_dir'..." 
+mkdir -p 
+destination_dir  
+echo "Copying 'sample.txt' to 'destination_dir'..." 
+cp source_dir/sample.txt destination_dir/ 
+echo "Operation completed successfully!" 
+
+out put
+$ cd
+$ cd  destination_drs
+$ ls
+sample,txt
+$ cat sample.txt
+this is sample file
+$sh 3b.sh
+
+4a)))write a shell script that accepts two file name....
+
+if [ $# -ne 2 ]; then 
+echo "Usage: $0 <file1> <file2>" 
+exit 1 
+fi 
+file1="$1" 
+file2="$2"  
+if [ ! -e "$file1" ]; then 
+echo "Error: '$file1' does not exist." 
+exit 1 
+fi 
+if [ ! -e "$file2" ]; then 
+echo "Error: '$file2' does not exist." 
+exit 1 
+fi 
+perm1=$(stat -c "%A" "$file1") 
+perm2=$(stat -c "%A" "$file2")  
+if [ "$perm1" = "$perm2" ]; then 
+echo "Permissions are identical: $perm1" 
+echo "$file1 permissions: $perm1" 
+echo "$file2 permissions: $perm2" 
+fi
+
+out put 
+$cat 2.txt
+this is second file
+$ ls
+
+4b) Shell script to count the number of files and directories in a given path.  
+
+if [ $# -ne 1 ]; then 
+echo "Usage: $0 <directory_path>" 
+exit 1 
+fi 
+path="$1" 
+if [ ! -d "$path" ]; then 
+echo "Error: '$path' is not a valid directory." 
+exit 1 
+fi 
+file_count=$(find "$path" -type f | wc -l) 
+dir_count=$(find "$path" -type d | wc -l) 
+echo "In directory: $path" 
+echo "Number of files: $file_count" 
+echo "Number of directories: $dir_count" 
+
+output
+$sh 4b.sh /home/unix
+pwd
+
+5a))a) Shell script to accept a name from user and greet them with a message.  
+echo "Enter your name: " 
+read name 
+echo "Hello,long time to see u!"
+
+5b))
+if [ $# -ne 2 ]; then 
+  echo "Usage: $0 <number1> <number2>" 
+  exit 1 
+fi 
+num1=$1 
+num2=$2 
+sum=$((num1 + num2)) 
+echo "The sum of $num1 and $num2 is: $sum"
+6a)) chech even or odd
+
+echo "Enter a number: " 
+read num
+if [ $((num % 2)) -eq 0 ]; then 
+echo "$num is even." 
+else 
+echo "$num is odd." 
+fi
+
+6b))
+echo "Enter the file name: " 
+read filename 
+if [ -e "$filename" ]; then 
+echo "File '$filename' exists." 
+if [ -r "$filename" ]; then 
+echo "File is readable." 
+else 
+echo "File is NOT readable." 
+fi
+# Check write permission 
+if [ -w "$filename" ]; then 
+echo "File is writable." 
+else 
+echo "File is NOT writable." 
+fi 
+if [ -x "$filename" ]; then 
+echo "File is executable." 
+else 
+echo "File is NOT executable." 
+fi 
+else 
+echo "File '$filename' does not exist." 
+fi 
+
+out put
+file name
+$ chmod 700 11.txt
+#txt is exit
+$ file name
+$ chmod 007 11.txt
+#not read able
+
+7a)) Shell script to print the multiplication table of a given number. 
+
+read -p "Enter a number: " num
+echo "Multiplication table of $num"
+for i in {1..10}
+do
+    echo "$num x $i = $((num * i))"
+done
+
+7b))
+echo "Enter the number"
+read num
+fact=1
+for i in (seq 1 $ num)
+do 
+fact=$((fact * i)) 
+done 
+echo "Factorial of $num is: $fact" 
+
+8a))Shell script to perform basic arithmetic operations using case. 
+
+echo -n "Enter first number: " 
+read num1 
+echo -n "Enter second number: " 
+read num2 
+echo "Choose an operation:" 
+echo "1. Addition (+)" 
+echo "2. Subtraction (-)" 
+echo "3. Multiplication (*)" 
+echo "4. Division (/)" 
+echo -n "Enter your choice (1-4): " 
+read choice 
+ 
+case $choice in 
+  1) 
+    result=$((num1 + num2)) 
+    echo "Result: $num1 + $num2 = $result" 
+    ;; 
+  2) 
+    result=$((num1 - num2)) 
+    echo "Result: $num1 - $num2 = $result" 
+    ;; 
+  3) 
+    result=$((num1 * num2)) 
+    echo "Result: $num1 * $num2 = $result" 
+    ;; 
+  4) 
+    if [ "$num2" -eq 0 ]; then 
+      echo "Error: Division by zero is not allowed." 
+    else 
+      result=$((num1 / num2)) 
+      echo "Result: $num1 / $num2 = $result" 
+    fi 
+    ;; 
+  *) 
+    echo "Invalid choice. Please select 1, 2, 3, or 4." 
+    ;; 
+esac
+
+8b))
+echo "operation menu"
+echo "1. List files" 
+  echo "2. View current directory" 
+  echo "3. Exit" 
+  echo -n "Enter your choice [1-3]: " 
+  read choice 
+ 
+  case $choice in 
+    1) 
+      echo "Files in current directory:" 
+      ls -l 
+      ;; 
+    2) 
+      echo "Current directory:" 
+      pwd 
+      ;; 
+    3) 
+      echo "Exiting... Goodbye!" 
+      exit 0 
+      ;; 
+    *) 
+      echo "Invalid choice. Please enter 1, 2, or 3." 
+      ;; 
+  esac 
+done
+
+9a)) Shell script to check whether a string is a palindrome. 
+
+echo "Enter a string: " 
+read str 
+rev_str=$(echo "$str" | rev) 
+if [ "$str" = "$rev_str" ]; then 
+echo "'$str' is a palindrome." 
+else 
+echo "'$str' is not a palindrome." 
+fi 
+
+9b))
+
+echo "Enter the file name: " 
+read file
+w='cat $ file|wc-w'
+c='cat $ file|wc-c'
+l='cat $ file|wc-l'
+echo "Number of line in $l"
+echo "Number of  words in  $w" 
+echo "Number of characters is $c"
+
+10))  Shell script to display system information.
+
+echo "Hello, World!" 
+echo "System Information" 
+echo "Hostname: $(hostname)" 
+echo "Operating System: $(uname -o)" 
+echo "Kernel Version: $(uname -r)" 
+echo "Architecture: $(uname -m)" 
+echo "Current User: $(whoami)" 
+echo "IP Address: (ip -4 addr show | grep inet)”
+
+10b))
+
+ 
+echo "Enter three numbers:" 
+read a b c 
+if [ $a -ge $b ] && [ $a -ge $c ]; then 
+    echo "$a is the greatest" 
+elif [ $b -ge $a ] && [ $b -ge $c ]; then 
+    echo "$b is the greatest" 
+else 
+    echo "$c is the greatest" 
+fi 
+
+11)) Shell script to extract usernames from /etc/passwd using grep.
+
+if [ ! -r /etc/passwd ]; then 
+echo "Error: Cannot read /etc/passwd" 
+exit 1 
+fi 
+echo "Usernames in /etc/passwd:" 
+cut -d: -f1 /etc/passwd
+
+11b))Shell script to remove duplicate lines from a file using sort and uniq. 
+
+echo "Enter the file name: " 
+read filename
+if [ ! –f "$filename" ]; then 
+echo "Error: File '$filename' does not exist." 
+exit 1 
+fi 
+output="unique_$filename" 
+sort "$filename" | uniq > "$output" 
+echo "Duplicate lines removed. Output saved to '$output'." 
+
+12))Write a shell script that accept one or more filenames as argument and convert all of them to 
+uppercase, provided they exist in current directory.  
+
+if [ $# -lt 1 ]; then 
+echo "Usage: $0 <file1> [file2] ..." 
+exit 1 
+fi 
+for file in "$@" 
+do 
+if [ -f "$file" ]; then 
+upper_file="UPPER_$file" 
+tr '[:lower:]' '[:upper:]' < "$file" > "$upper_file" 
+echo "Converted '$file' to uppercase and saved as '$upper_file'" 
+else 
+echo "File '$file' does not exist in current directory." 
+fi 
+done 
+
+12b))
+
+target_file="$1" 
+start_dir="$2"
+if [-z "$ start_dir"];then
+start-dir="."
+fi
+inode=$(ls -i "$target_file" | awk '{print $1}') 
+find "$start_dir" -xdev -inum "$inode" 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
